@@ -1,0 +1,50 @@
+﻿<ContentPage
+    x:Class="ProjectRadio.Views.PlayerPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="False"
+    BackgroundColor="White"
+    Visual="Material">
+    <ContentPage.Content>
+        <Grid>
+            <Image Style="{StaticResource AppLogo}"/>
+
+            <Frame
+                Margin="15"
+                Padding="0"
+                BackgroundColor="White"
+                CornerRadius="15"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand">
+
+                <StackLayout
+                    Padding="20,10,20,10"
+                    HeightRequest="50"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Image Source="{Binding PlayImage}" Style="{StaticResource PlayerButton}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TogglePlayerCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Slider
+                        HorizontalOptions="FillAndExpand"
+                        Maximum="{Binding MaxVolume}"
+                        MaximumTrackColor="LightGray"
+                        Minimum="0"
+                        MinimumTrackColor="Accent"
+                        VerticalOptions="Center"
+                        Value="{Binding Volume}"/>
+
+                    <Image Source="{Binding MuteImage}" Style="{StaticResource PlayerButton}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleMuteCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

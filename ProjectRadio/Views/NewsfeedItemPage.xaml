@@ -1,0 +1,47 @@
+﻿<ContentPage
+    x:Class="ProjectRadio.Views.NewsfeedItemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:ProjectRadio.Converters"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:util="clr-namespace:LabelHtml.Forms.Plugin.Abstractions;assembly=HtmlLabel.Forms.Plugin"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White"
+    Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:UriToImageSource x:Key="UriToImageSource"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="270"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Binding Path=Data.Image}"
+                        VerticalOptions="Start"/>
+
+                    <StackLayout Margin="20,10,20,10">
+                        <Label
+                            FontAttributes="Bold"
+                            Text="{Binding Data.Title}"
+                            WidthRequest="1000">
+                            <Label.IsVisible>
+                                <OnPlatform x:TypeArguments="x:Boolean">
+                                    <On Platform="UWP" Value="True"/>
+                                    <On Platform="Android" Value="True"/>
+                                    <On Platform="iOS" Value="True"/>
+                                </OnPlatform>
+                            </Label.IsVisible>
+                        </Label>
+                        <util:HtmlLabel Text="{Binding Path=Data.Description}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

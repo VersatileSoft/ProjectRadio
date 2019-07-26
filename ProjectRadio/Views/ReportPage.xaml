@@ -1,0 +1,112 @@
+﻿<ContentPage x:Name="this"
+    x:Class="ProjectRadio.Views.ReportPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:ProjectRadio.Converters"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:util="clr-namespace:LabelHtml.Forms.Plugin.Abstractions;assembly=HtmlLabel.Forms.Plugin"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White"
+    Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:UriToImageSource x:Key="UriToImageSource"/>
+            <conv:UrlToFileName x:Key="UrlToFileName"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="20,20,20,0" Spacing="20">
+            <Label
+                FontSize="Large"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Zostań reporterem wysyłając opis i zdjęcie ze zdarzenia, którym chcesz się podzielić z radiem."
+                VerticalOptions="Start"/>
+
+            <StackLayout>
+                <Label Text="Imię"/>
+                <Entry BackgroundColor="White" Text="{Binding Report.Name}"/>
+
+                <Label Margin="0,20,0,0" Text="Nazwisko"/>
+                <Entry BackgroundColor="White" Text="{Binding Report.Surname}"/>
+
+                <Label Margin="0,20,0,0" Text="Tytuł wiadomości"/>
+                <Entry BackgroundColor="White" Text="{Binding Report.Title}"/>
+
+                <Label Margin="0,20,0,0" Text="Opis zdarzenia"/>
+                <Editor
+                    AutoSize="TextChanges"
+                    BackgroundColor="White"
+                    Text="{Binding Report.Description}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" WidthRequest="70">
+                <Button
+                    Command="{Binding TakePictureCommand}"
+                    Style="{StaticResource ReportButton}"
+                    Text="Zrób zdjęcie"/>
+
+                <Button
+                    Command="{Binding PickPictureCommand}"
+                    HorizontalOptions="EndAndExpand"
+                    Style="{StaticResource ReportButton}"
+                    Text="Dodaj zdjęcie"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="0">
+                <CheckBox
+                    HorizontalOptions="Start"
+                    IsChecked="{Binding IsStatueAccepted}"
+                    VerticalOptions="Center"
+                    Color="#11a7e6"/>
+
+                <util:HtmlLabel
+                    Margin="-10,0,0,0"
+                    Text="&lt;a href=&quot;https://www.facebook.com/VersatileSoftware&quot;&gt;Akceptuję regulamin&lt;/a&gt;"
+                    VerticalOptions="Center"/>
+
+                <Button
+                    Command="{Binding SendReportCommand}"
+                    HorizontalOptions="EndAndExpand"
+                    Style="{StaticResource ReportButton}"
+                    Text="Wyślij wiadomość"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+
+            <CollectionView
+                Margin="-20,-10,-20,0"
+                ItemsSource="{Binding Report.Images}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="20,5,20,5"
+                            Orientation="Horizontal"
+                            Visual="Material">
+
+                            <Label Text="{Binding Url, Converter={StaticResource UrlToFileName}}" VerticalOptions="Center"/>
+
+                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                <Button
+                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.ImagePopupCommand}"
+                                    CommandParameter="{Binding Url}"
+                                    HorizontalOptions="End"
+                                    Style="{StaticResource ReportButton}"
+                                    Text="Pokaż"
+                                    WidthRequest="75"/>
+                                <Button
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.DeleteImageCommand}"
+                                    CommandParameter="{Binding Url}"
+                                    Style="{StaticResource ReportButton}"
+                                    Text="Usuń"
+                                    WidthRequest="75"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

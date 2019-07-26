@@ -1,0 +1,77 @@
+﻿<ContentPage
+    x:Class="ProjectRadio.Views.NewsfeedListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ProjectRadio.Data="clr-namespace:ProjectRadio.ViewModels.Data"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:conv="clr-namespace:ProjectRadio.Converters"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White"
+    Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:UriToImageSource x:Key="UriToImageSource"/>
+            <conv:NegateBoolConverter x:Key="NegateBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <ActivityIndicator IsVisible="{Binding IsLoading}" Style="{StaticResource ActivityIndicator}"/>
+
+            <CollectionView
+                IsVisible="{Binding IsLoading, Converter={StaticResource NegateBoolConverter}}"
+                ItemSizingStrategy="MeasureAllItems"
+                ItemsLayout="VerticalList"
+                ItemsSource="{Binding Newsfeeds}"
+                SelectionMode="Single">
+
+                <CollectionView.Behaviors>
+                    <b:EventToCommandBehavior
+                        Command="{Binding ItemTappedCommand}"
+                        EventArgsParameterPath="CurrentSelection"
+                        EventName="SelectionChanged"/>
+                </CollectionView.Behaviors>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ProjectRadio.Data:Newsfeed">
+                        <StackLayout>
+                            <Frame
+                                Margin="10,5,10,5"
+                                Padding="0"
+                                BackgroundColor="White"
+                                CornerRadius="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Aspect="AspectFill"
+                                        IsOpaque="False"
+                                        Source="{x:Binding Path=Image}"/>
+
+                                    <StackLayout Grid.Row="1" Padding="8,0,8,8">
+                                        <Label LineBreakMode="TailTruncation" MaxLines="2">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource TitleLabel}" Text="{x:Binding Title}"/>
+                                                    <Span Text="  "/>
+                                                    <Span Style="{StaticResource DateLabel}" Text="{x:Binding Date}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Style="{StaticResource DescriptionLabel}" Text="{x:Binding SimplifiedDescription}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,47 @@
+﻿<ContentPage
+    x:Class="ProjectRadio.Views.ContactPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White"
+    Visual="Material">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Margin="0,20,0,0">
+                <Label
+                    FontSize="Medium"
+                    Style="{StaticResource ContactLabel}"
+                    Text="Numer telefonu:"/>
+                <Label Style="{StaticResource ContactLabel}" Text="+48 222 442 245"/>
+                
+                <Button
+                    Command="{Binding PhoneCallCommand}"
+                    Style="{StaticResource ContactButton}"
+                    Text="Zadzwoń"/>
+
+                <Label
+                    FontSize="Medium"
+                    Style="{StaticResource ContactLabel}"
+                    Text="Adres E-mail:"/>
+                <Label Style="{StaticResource ContactLabel}" Text="test@test.pl"/>
+                
+                <Button
+                    Command="{Binding SendEmailCommand}"
+                    Style="{StaticResource ContactButton}"
+                    Text="Wyślij E-mail"/>
+
+                <Label
+                    FontSize="Medium"
+                    Style="{StaticResource ContactLabel}"
+                    Text="Adres siedziby:"/>
+                <Label Style="{StaticResource ContactLabel}" Text="ul. Wolności 3 00-456 Warszawa"/>
+                
+                <Button
+                    Command="{Binding OpenLocationCommand}"
+                    Style="{StaticResource ContactButton}"
+                    Text="Otwórz w mapach"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

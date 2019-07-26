@@ -1,0 +1,92 @@
+﻿<prism:PrismApplication
+    x:Class="ProjectRadio.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Autofac;assembly=Prism.Autofac.Forms">
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+            <!--  LISTS  -->
+            <Style x:Key="TitleLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+
+            <Style x:Key="DateLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="Gray"/>
+            </Style>
+
+            <Style x:Key="DescriptionLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="MaxLines" Value="5"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <!--  OTHERS  -->
+            <Style x:Key="MenuImage" TargetType="Image">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+
+            <Style x:Key="MenuLabel" TargetType="Label">
+                <Setter Property="Grid.Column" Value="2"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style x:Key="ReportButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="155"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="#11a7e6"/>
+            </Style>
+
+            <Style x:Key="PlayerButton" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="PlayerStackLayout" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Padding" Value="20,10,20,10"/>
+            </Style>
+
+            <Style x:Key="AppLogo" TargetType="Image">
+                <Setter Property="Source" Value="Images/AppLogo.png"/>
+                <Setter Property="WidthRequest" Value="150"/>
+                <Setter Property="HeightRequest" Value="150"/>
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="0,20,0,20"/>
+            </Style>
+
+            <Style x:Key="ContactButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="130"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="BackgroundColor" Value="#11a7e6"/>
+            </Style>
+
+            <Style x:Key="ContactLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <!--  NEW  -->
+
+            <Style x:Key="ActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="IsRunning" Value="True"/>
+                <Setter Property="Color" Value="#11a7e6"/>
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

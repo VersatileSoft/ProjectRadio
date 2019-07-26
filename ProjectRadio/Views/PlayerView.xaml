@@ -1,0 +1,48 @@
+﻿<ContentView
+    x:Class="ProjectRadio.Views.PlayerView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:util="clr-namespace:ProjectRadio.Views.Util"
+    Visual="Material">
+
+    <ContentView.Content>
+        <Frame
+            Margin="0,10,0,10"
+            Padding="0"
+            BackgroundColor="White"
+            CornerRadius="5">
+            <StackLayout Style="{StaticResource PlayerStackLayout}">
+                <Image Source="{Binding PlayImage}" Style="{StaticResource PlayerButton}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TogglePlayerCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <util:SeekBar
+                    Margin="10,0,10,0"
+                    HorizontalOptions="FillAndExpand"
+                    Maximum="100"
+                    MaximumTrackColor="LightGray"
+                    Minimum="0"
+                    MinimumTrackColor="Accent"
+                    VerticalOptions="Center"
+                    Value="{Binding CurrentProgress}">
+                    <util:SeekBar.Behaviors>
+                        <b:EventToCommandBehavior Command="{Binding TouchDownCommand}" EventName="TouchDown"/>
+
+                        <b:EventToCommandBehavior
+                            Command="{Binding TouchUpCommand}"
+                            EventArgsParameterPath="Position"
+                            EventName="TouchUp"/>
+                    </util:SeekBar.Behaviors>
+                </util:SeekBar>
+
+                <Label
+                    HorizontalOptions="Start"
+                    Text="{Binding TimeStatus}"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
